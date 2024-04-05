@@ -10,59 +10,59 @@ from PIL import Image
 import re
 
 
-# ts = pd.read_csv('train.csv')
-# #
-# down_w = 128
-# down_h = 128
-# down_sz = (down_w,down_h)
-# #
-# face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-# for i in range(0,69540):
-#   print(str(i))
-#   img = np.asarray(Image.open('train_1/' + str(i) + '.jpg'))
-#   print(img.shape)
-#   if (img.shape[-1] != 3 and len(img.shape) == 3):
-#     ts = ts.drop(i)
-#     print(str(img.shape[-1]) + " layers")
-#     print("Row " + str(i) + " dropped!")
-#     continue
-#   img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-#   gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#   faces = face_cascade.detectMultiScale(gray,1.3,9)
-#   im1 = 0
-#   for (x, y, w, h) in faces:
-#     c_img = img[y:y+h,x:x+w]
-#     im1 = c_img
-#   if (type(im1) == int):
-#     resz = cv2.resize(img,down_sz,interpolation=cv2.INTER_LINEAR)
-#     print("whole")
-#   else:
-#     resz = cv2.resize(im1,down_sz,interpolation=cv2.INTER_LINEAR)
-#     print("crop")
-#   cv2.imwrite('cropped/' + str(i) + ".jpg", resz)
-#   print('cropped/' + str(i) + ".jpg")
-# ts.to_csv('final_train.csv')
-# #
-# for f in glob.iglob('test/*'):
-#   print(f)
-#   img = np.asarray(Image.open(f))
-#   img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-#   gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#   faces = face_cascade.detectMultiScale(gray,1.3,9)
-#   im1 = 0
-#   for (x, y, w, h) in faces:
-#     c_img = img[y:y+h,x:x+w]
-#     im1 = c_img
-#   numbers = re.findall('\d+', f)
-#   numbers = int(numbers[-1])
-#   if (type(im1) == int):
-#     resz = cv2.resize(img,down_sz,interpolation=cv2.INTER_LINEAR)
-#     print("whole")
-#   else:
-#     resz = cv2.resize(im1,down_sz,interpolation=cv2.INTER_LINEAR)
-#     print("crop")
-#   cv2.imwrite('cropped_test/' + str(numbers) + ".jpg", resz)
-#   print('cropped_test/' + str(numbers) + ".jpg")
+ts = pd.read_csv('train.csv')
+#
+down_w = 128
+down_h = 128
+down_sz = (down_w,down_h)
+#
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+for i in range(0,69540):
+  print(str(i))
+  img = np.asarray(Image.open('train_1/' + str(i) + '.jpg'))
+  print(img.shape)
+  if (img.shape[-1] != 3 and len(img.shape) == 3):
+    ts = ts.drop(i)
+    print(str(img.shape[-1]) + " layers")
+    print("Row " + str(i) + " dropped!")
+    continue
+  img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  faces = face_cascade.detectMultiScale(gray,1.3,9)
+  im1 = 0
+  for (x, y, w, h) in faces:
+    c_img = img[y:y+h,x:x+w]
+    im1 = c_img
+  if (type(im1) == int):
+    resz = cv2.resize(img,down_sz,interpolation=cv2.INTER_LINEAR)
+    print("whole")
+  else:
+    resz = cv2.resize(im1,down_sz,interpolation=cv2.INTER_LINEAR)
+    print("crop")
+  cv2.imwrite('cropped/' + str(i) + ".jpg", resz)
+  print('cropped/' + str(i) + ".jpg")
+ts.to_csv('final_train.csv')
+#
+for f in glob.iglob('test/*'):
+  print(f)
+  img = np.asarray(Image.open(f))
+  img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  faces = face_cascade.detectMultiScale(gray,1.3,9)
+  im1 = 0
+  for (x, y, w, h) in faces:
+    c_img = img[y:y+h,x:x+w]
+    im1 = c_img
+  numbers = re.findall('\d+', f)
+  numbers = int(numbers[-1])
+  if (type(im1) == int):
+    resz = cv2.resize(img,down_sz,interpolation=cv2.INTER_LINEAR)
+    print("whole")
+  else:
+    resz = cv2.resize(im1,down_sz,interpolation=cv2.INTER_LINEAR)
+    print("crop")
+  cv2.imwrite('cropped_test/' + str(numbers) + ".jpg", resz)
+  print('cropped_test/' + str(numbers) + ".jpg")
 
 
 
